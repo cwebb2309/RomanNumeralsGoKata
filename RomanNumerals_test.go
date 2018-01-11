@@ -4,79 +4,38 @@ import (
 	"testing"
 )
 
-func TestGetDigitFromNumbers1s(t *testing.T) {
-
-	var rst int
-	rst = getDigitFromNumber(1, 2018)
-
-	if rst != 8 {
-		t.Error("Should return 8")
-	}
-
+type datePartTest struct {
+	n        int
+	expected int
 }
 
-func TestGetDigitFromNumbers10s(t *testing.T) {
-
-	var rst int
-	rst = getDigitFromNumber(10, 2018)
-
-	if rst != 1 {
-		t.Error("Should return 1")
-	}
-
+var datePartTests = []datePartTest{
+	{1, 8}, {10, 1}, {100, 0}, {1000, 2},
 }
 
-func TestGetDigitFromNumbers100s(t *testing.T) {
-
-	var rst int
-	rst = getDigitFromNumber(100, 2018)
-
-	if rst != 0 {
-		t.Error("Should return 0")
+func TestDateParts(t *testing.T) {
+	for _, tt := range datePartTests {
+		actual := getDigitFromNumber(tt.n, 2018)
+		if actual != tt.expected {
+			t.Errorf("Expected : %d", tt.expected)
+		}
 	}
-
 }
 
-func TestGetDigitFromNumbers1000s(t *testing.T) {
-
-	var rst int
-	rst = getDigitFromNumber(1000, 2018)
-
-	if rst != 2 {
-		t.Error("Should return 2")
-	}
-
+type romanTest struct {
+	n        int
+	expected string
 }
 
-func TestDecimalToRoman5(t *testing.T) {
-
-	var rst string
-	rst = decimalToRoman(5)
-
-	if rst != "V" {
-		t.Error("Should return V")
-	}
-
+var romanTests = []romanTest{
+	{5, "V"}, {1900, "MCM"}, {499, "CDXCIX"},
 }
 
-func TestDecimalToRoman1900(t *testing.T) {
-
-	var rst string
-	rst = decimalToRoman(1900)
-
-	if rst != "MCM" {
-		t.Error("Should return MCM")
+func TestDecimalToRoman(t *testing.T) {
+	for _, tt := range romanTests {
+		actual := decimalToRoman(tt.n)
+		if actual != tt.expected {
+			t.Errorf("Expected : %s", tt.expected)
+		}
 	}
-
-}
-
-func TestDecimalToRoman499(t *testing.T) {
-
-	var rst string
-	rst = decimalToRoman(499)
-
-	if rst != "CDXCIX" {
-		t.Error("Should return CDXCIX")
-	}
-
 }

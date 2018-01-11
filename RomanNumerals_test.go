@@ -4,18 +4,19 @@ import (
 	"testing"
 )
 
-type datePartTest struct {
+type numPartTest struct {
 	n        int
+	testNum  int
 	expected int
 }
 
-var datePartTests = []datePartTest{
-	{1, 8}, {10, 1}, {100, 0}, {1000, 2},
+var numPartTests = []numPartTest{
+	{1, 2018, 8}, {10, 2018, 1}, {100, 2018, 0}, {1000, 2018, 2},
 }
 
-func TestDateParts(t *testing.T) {
-	for _, tt := range datePartTests {
-		actual := getDigitFromNumber(tt.n, 2018)
+func TestNumParts(t *testing.T) {
+	for _, tt := range numPartTests {
+		actual := getDigitFromNumber(tt.n, tt.testNum)
 		if actual != tt.expected {
 			t.Errorf("Expected : %d", tt.expected)
 		}
